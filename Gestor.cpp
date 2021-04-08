@@ -34,7 +34,7 @@ void Gestor() {
 			
 			break;
 		case '6':
-			cout << "Posicao Valor Minimo " << posicaoValorMin(v, tamanho) << endl;
+			
 			break;
 		case '7':
 			
