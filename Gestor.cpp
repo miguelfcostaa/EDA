@@ -1,3 +1,7 @@
+#include <locale.h>
+#include <iostream>
+
+
 void Gestor() {
 	bool sair = false;
 	char opcao;
