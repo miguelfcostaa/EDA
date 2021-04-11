@@ -6,7 +6,7 @@
 using namespace std;
 
 
-int setor() {
+int sector() {
 
 	cout << "Sector : " << letra << "  |  Responsavel : " << nome << "  |  Capacidade : " << capacidade << "  |  Produto : " << produto << "  |  Área : " << area << endl;
 	cout << "Produto : " << produto << "  |  Preço : " << endl;
