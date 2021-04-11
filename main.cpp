@@ -5,9 +5,8 @@
 
 using namespace std;
 
-setlocale(LC_ALL, “Portuguese”);
-
 int main() {
+	locale::global(locale(""));
 	int escolha = -1;
 	cout << "(s) Seguinte   |   (g) Gestão   |   (n) Sair" << endl;
 	cin >> escolha;
