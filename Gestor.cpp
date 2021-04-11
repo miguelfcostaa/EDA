@@ -3,7 +3,7 @@ void Gestor() {
 	char opcao;
 	do
 	{
-		cout << "***** Bem Vindo Gestor *****" << endl;;
+		cout << "***** Bem Vindo Gestor *****" << endl;
 		cout << "(1) - Remover Produtos" << endl;
 		cout << "(2) - Atualizar Preço" << endl;
 		cout << "(3) - Iniciar Campanha" << endl;
