@@ -1,6 +1,8 @@
-#include <locale.h>
 #include <iostream>
+#include < stdlib.h >
+#include <time.h>
 
+using namespace std;
 
 void Gestor() {
 	bool sair = false;
@@ -23,25 +25,25 @@ void Gestor() {
 		cout << endl;
 		switch (opcao) {
 		case '1':
-			
+
 			break;
 		case '2':
-			
+
 			break;
 		case '3':
-			
+
 			break;
 		case '4':
-			
+
 			break;
 		case '5':
-			
+
 			break;
 		case '6':
 			
 			break;
 		case '7':
-			
+
 			break;
 		case '8':
 
@@ -59,4 +61,3 @@ void Gestor() {
 	} while (!sair);
 
 }
-
