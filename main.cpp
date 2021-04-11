@@ -1,7 +1,7 @@
 #include <iostream>
 #include < stdlib.h >
 #include <time.h>
-#include <locale.h>
+#include <locale>
 
 using namespace std;
 
