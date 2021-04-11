@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
 	int escolha = -1;
-	cout << "(s) Seguinte   |   (g)Gestão   |   (n)Sair" << endl;
+	cout << "(s) Seguinte   |   (g) Gestão   |   (n) Sair" << endl;
 	cin >> escolha;
 	if (escolha == 's') {
 
