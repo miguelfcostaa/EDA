@@ -19,4 +19,5 @@ int main() {
 	else if (escolha == 'n') {
 
 	}
+	return 0;
 }
