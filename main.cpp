@@ -3,7 +3,7 @@
 #include <time.h>
 #include <locale>
 #include "Gestor.h"
-#include "Setores.h"
+#include "sector.h"
 
 
 using namespace std;
