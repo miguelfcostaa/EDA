@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void Gestor() {
+void gestor() {
 	bool sair = false;
 	char opcao;
 	do
@@ -25,31 +25,31 @@ void Gestor() {
 		cout << endl;
 		switch (opcao) {
 		case '1':
-
+			removeProd();
 			break;
 		case '2':
-
+			atualizaPreco();
 			break;
 		case '3':
-
+			iniciaCamp();
 			break;
 		case '4':
-
+			gravarSuper();
 			break;
 		case '5':
-
+			carregaSuper();
 			break;
 		case '6':
-			
+			imprimeProd();
 			break;
 		case '7':
-
+			novaArea();
 			break;
 		case '8':
-
+			MostraReg();
 			break;
 		case '9':
-
+			alteraArea();
 			break;
 		case '0':
 			cout << "Escolheu a opcao Sair. Adeus!" << endl;
