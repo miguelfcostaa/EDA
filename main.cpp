@@ -22,7 +22,7 @@ int main() {
 			sector(Nsector);
 			break;
 		case 'g':
-			gestor();
+			Gestor();
 			break;
 		case 'n':
 			sair = true;
