@@ -2,17 +2,18 @@
 #include<iostream>
 #include <time.h>
 #include <fstream>
+#include <string>
+#include "Setores.h"
 
 using namespace std;
 
 
-int sector() {
 
-	cout << "Sector : " << letra << "  |  Responsavel : " << nome << "  |  Capacidade : " << capacidade << "  |  Produto : " << produto << "  |  Área : " << area << endl;
-	cout << "Produto : " << produto << "  |  Preço : " << endl;
 
+int letra(int i) {
+//{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+	return 0;
 }
-
 
 int nome(int nome) {
 	cout << "Insira o nome do responsavel do sector " << letra << " : ";
@@ -23,6 +24,10 @@ int nome(int nome) {
 
 void capacidade(int capacidade) {
 	capacidade = rand() % 10 + 5;
+}
+
+void ocupacao() {
+
 }
 
 string produto() {
@@ -47,4 +52,14 @@ string area() {
 	}
 	area.close();
 	return line;
+}
+
+
+int sector(int Nsector) {
+	for (int i = 0; i < Nsector; i++) {
+		cout << "Sector : " << letra << "  |  Responsavel : " << nome << "  |  Capacidade : " << capacidade << "  |  Ocupação : " << ocupacao << "  |  Área : " << area << endl;
+		cout << "Produto : " << produto << "  |  Preço : " << endl;
+
+	}
+	return 0;
 }
