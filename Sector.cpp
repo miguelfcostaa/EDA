@@ -3,7 +3,7 @@
 #include <time.h>
 #include <fstream>
 #include <string>
-#include "Setores.h"
+#include "sector.h"
 
 using namespace std;
 
