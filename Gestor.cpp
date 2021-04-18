@@ -1,6 +1,8 @@
 #include <iostream>
 #include < stdlib.h >
 #include <time.h>
+#include "Gestor.h"
+
 
 using namespace std;
 
@@ -26,9 +28,14 @@ void gestor() {
 		switch (opcao) {
 		case '1':
 			removeProd();
+			cout << "Qual é o produto que pertende remover: " << setores[i].produto << endl;
+			
 			break;
 		case '2':
 			atualizaPreco();
+			cout << "Qual é o produto que pertende alterar o preço: " << setores[i].produto << endl;
+			cout << "Qual é o novo preço do produto: " << setores[i].preço << endl;
+
 			break;
 		case '3':
 			iniciaCamp();
