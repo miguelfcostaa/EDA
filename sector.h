@@ -1,8 +1,16 @@
 #pragma once
+#include <string>
 
-int sector(int Nsector);
+using namespace std;
 
-int letra(int i);
-int nome(int nome);
-void capacidade(int capacidade);
-void ocupacao();
+struct sector {
+	char letra[26];
+	int nome;
+	int capacidade;
+	int Nprodutos;
+	string produtos;
+	string areas;
+};
+
+sector* criasector(sector* sectores, int Nsector);
+void mostraSector(sector* sectores, int Nsector);
