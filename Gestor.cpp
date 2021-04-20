@@ -1,7 +1,7 @@
 #include <iostream>
-#include < stdlib.h >
+#include <stdlib.h>
 #include <time.h>
-#include "Gestor.h"
+#include "gestor.h"
 
 
 using namespace std;
@@ -25,41 +25,45 @@ void gestor() {
 		cout << "Selecione a sua opção:" << endl;
 		cin >> opcao;
 		cout << endl;
+		string p;
+		int m;
 		switch (opcao) {
 		case '1':
-			removeProd();
-			cout << "Qual é o produto que pertende remover: " << setores[i].produto << endl;
-			
+		//	cout << "Qual é o produto que pertende remover: " << p << endl;
+			//removeProd();
+
 			break;
 		case '2':
-			atualizaPreco();
-			cout << "Qual é o produto que pertende alterar o preço: " << setores[i].produto << endl;
-			cout << "Qual é o novo preço do produto: " << setores[i].preço << endl;
+		//	cout << "Qual é o produto que pertende alterar o preço: " << p << endl;
+		//	cin >> p;
+		//	cout << "Qual é o novo preço do produto: " << m << endl;
+		//	cin >> m;
+			//atualizaPreco();
 
 			break;
 		case '3':
-			iniciaCamp();
+			//iniciaCamp();
 			break;
 		case '4':
-			gravarSuper();
+			//gravarSuper();
 			break;
 		case '5':
-			carregaSuper();
+			//carregaSuper();
 			break;
 		case '6':
-			imprimeProd();
+			//imprimeProd();
 			break;
 		case '7':
-			novaArea();
+			//novaArea();
 			break;
 		case '8':
-			MostraReg();
+			//MostraReg();
 			break;
 		case '9':
-			alteraArea();
+			//alteraArea();
 			break;
 		case '0':
-			cout << "Escolheu a opcao Sair. Adeus!" << endl;
+			cout << "Escolheu a opcao Voltar." << endl;
 			sair = true;
 			break;
 		default:
