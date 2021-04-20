@@ -29,9 +29,9 @@ void gestor() {
 		int m;
 		switch (opcao) {
 		case '1':
-		//	cout << "Qual é o produto que pertende remover: " << p << endl;
-			//removeProd();
-
+			cout << "Qual é o produto que pertende remover: ";
+			cin >> p;
+			removeProd();
 			break;
 		case '2':
 		//	cout << "Qual é o produto que pertende alterar o preço: " << p << endl;
