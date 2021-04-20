@@ -4,8 +4,8 @@
 using namespace std;
 
 struct sector {
-	char letra[26];
-	int nome;
+	char letra;
+	string nome;
 	int capacidade;
 	int Nprodutos;
 	string produtos;
