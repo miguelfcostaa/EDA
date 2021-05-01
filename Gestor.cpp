@@ -4,9 +4,26 @@
 #include "Gestor.h"
 #include <fstream>
 #include <string>
+#include "sector.h"
+
+
 
 
 using namespace std;
+
+int atualizaPreco(sector* sectores, int Nsector,prod* produt) {
+	string nomeaux;
+	for (int i = 0; i < Nsector; i++) {
+		cout << "Introduza o nome do produto: ";
+		cin >> nomeaux;
+		if (nomeaux == produt[i].produto) {
+
+		}
+		else
+			cout << "Nao existe esse produto no armazem." << endl;
+	}
+}
+
 
 
 void gestor() {
@@ -73,7 +90,3 @@ void gestor() {
 }
 
 
-
-void removeProd() {
-
-}
