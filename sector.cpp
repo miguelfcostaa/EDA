@@ -19,7 +19,6 @@ string* produtos() {
 			i++;
 		}
 		produto.close();
-		cin.ignore();
 	}
 	return lines;
 }
@@ -35,9 +34,7 @@ prod* criaProd(sector* sectores, prod* produt, int Nsector) {
 				produt[j].produto = line[i];
 			}
 		}
-	}
-	//cout << "-----" << n << "-----" << endl;
-	return produt;
+	}	return produt;
 }
 
 
@@ -76,7 +73,6 @@ string* areas() {
 		}
 		area.close();
 	}
-	//cout << "_____-______" << line << "_______-_______" << endl;
 	return line;
 }
 
@@ -90,9 +86,10 @@ sector* criasector(sector* sectores, int Nsector) {
 		sectores[i].capacidade = capacidade();
 		sectores[i].Nproduto = Nproduto(sectores, Nsector);
 		string* lines = areas();
-		sectores[i].areas = lines[i];
+		//sectores[i].areas = lines[i];
 		cin.ignore();
 		cin.get();
+
 	}
 	return sectores;
 }
