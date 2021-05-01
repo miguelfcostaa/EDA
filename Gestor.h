@@ -1,5 +1,6 @@
 #pragma once
 
+
 void removeProd();
 void atualizaPreco();
 void iniciaCamp();
@@ -9,5 +10,6 @@ void imprimeProd();
 void novaArea();
 void MostraReg();
 void alteraArea();
+void voltar();
 
 void gestor();
