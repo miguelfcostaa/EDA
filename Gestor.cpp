@@ -1,10 +1,13 @@
 #include <iostream>
-#include <stdlib.h>
+#include < stdlib.h >
 #include <time.h>
-#include "gestor.h"
+#include "Gestor.h"
+#include <fstream>
+#include <string>
 
 
 using namespace std;
+
 
 void gestor() {
 	bool sair = false;
@@ -25,20 +28,16 @@ void gestor() {
 		cout << "Selecione a sua opção:" << endl;
 		cin >> opcao;
 		cout << endl;
-		string p;
-		int m;
 		switch (opcao) {
 		case '1':
-			cout << "Qual é o produto que pertende remover: ";
-			cin >> p;
-			removeProd();
+			//removeProd();
+			//cout << "Qual é o produto que pertende remover: ";
+			//cout << endl;
 			break;
 		case '2':
-		//	cout << "Qual é o produto que pertende alterar o preço: " << p << endl;
-		//	cin >> p;
-		//	cout << "Qual é o novo preço do produto: " << m << endl;
-		//	cin >> m;
 			//atualizaPreco();
+			//cout << "Qual é o produto que pertende alterar o preço: " << setores[i].produto << endl;
+			//cout << "Qual é o novo preço do produto: " << setores[i].preço << endl;
 
 			break;
 		case '3':
@@ -63,12 +62,18 @@ void gestor() {
 			//alteraArea();
 			break;
 		case '0':
-			cout << "Escolheu a opcao Voltar." << endl;
+			cout << "Escolheu a opção Voltar." << endl;
 			sair = true;
 			break;
 		default:
 			cout << "Escolha uma opcao valida." << endl;
 		}
 	} while (!sair);
+
+}
+
+
+
+void removeProd() {
 
 }
