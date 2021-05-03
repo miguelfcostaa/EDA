@@ -20,6 +20,7 @@ int main() {
     armazem* ap = new armazem; //criar object para a struct armazem
     criasector(sectores, Nsector);    //criar os sectores antes de mostrar
     criaProd(sectores, produt, Nsector);
+    criaArmazem(ap, produt);
     char escolha;
     bool sair = false;
     do {
@@ -30,7 +31,7 @@ int main() {
             mostraSector(sectores, produt, Nsector);
             break;
         case 'g':
-            gestor();
+            gestor(sectores, Nsector, produt, ap);
             break;
         case 'n':
             sair = true;
