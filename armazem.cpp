@@ -4,13 +4,14 @@
 #include <fstream>
 #include "armazem.h"
 
+
 using namespace std;
 
-/*
-string* produtos() {
-	ifstream produto("nome.txt");
+
+string* produtoss() {
+	ifstream produto("nomes.txt");
 	string l;
-	string* lines = new string[24];
+	string* lines = new string[100];
 	int i = 0;
 	if (produto.is_open()) {
 		while (getline(produto, l)) {
@@ -18,20 +19,21 @@ string* produtos() {
 			i++;
 		}
 		produto.close();
-		cin.ignore();
+
 	}
 	return lines;
 }
 
+
 armazem* criaArmazem(armazem* ap, prod* produt) {
-	string* lines = produtos();
+	string* lines = produtoss();
 	for (int i = 0; i < 50; i++) {
 		ap[i].armazem_produtos = lines[i];
 	}
-	return 0;
+	return ap;
 }
 
-
+/*
 void addProdutos(armazem* ap) {
 	prod* produt = criaProd(5);
 	armazem->stock = prod;
