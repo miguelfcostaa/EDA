@@ -23,8 +23,7 @@ string* produtos() {
 	return lines;
 }
 
-
-int criaArmazem(armazem* ap, prod* produt) {
+armazem* criaArmazem(armazem* ap, prod* produt) {
 	string* lines = produtos();
 	for (int i = 0; i < 50; i++) {
 		ap[i].armazem_produtos = lines[i];
