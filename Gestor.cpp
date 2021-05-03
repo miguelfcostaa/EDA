@@ -5,28 +5,29 @@
 #include <fstream>
 #include <string>
 #include "sector.h"
-
-
-
+#include "armazem.h"
 
 using namespace std;
 
-int atualizaPreco(sector* sectores, int Nsector,prod* produt) {
+
+int atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	string nomeaux;
 	for (int i = 0; i < Nsector; i++) {
 		cout << "Introduza o nome do produto: ";
 		cin >> nomeaux;
-		if (nomeaux == produt[i].produto) {
-
+		if (nomeaux == ap[i].armazem_produtos) {
+			cout << "Introduza um novo valor para o produto: ";
+			cin >> produt[i].preco;
 		}
 		else
 			cout << "Nao existe esse produto no armazem." << endl;
 	}
+	return 0;
 }
 
 
 
-void gestor() {
+void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	bool sair = false;
 	char opcao;
 	do
@@ -52,10 +53,7 @@ void gestor() {
 			//cout << endl;
 			break;
 		case '2':
-			//atualizaPreco();
-			//cout << "Qual é o produto que pertende alterar o preço: " << setores[i].produto << endl;
-			//cout << "Qual é o novo preço do produto: " << setores[i].preço << endl;
-
+			atualizaPreco(sectores,Nsector,produt,ap);
 			break;
 		case '3':
 			//iniciaCamp();
@@ -88,5 +86,4 @@ void gestor() {
 	} while (!sair);
 
 }
-
 
