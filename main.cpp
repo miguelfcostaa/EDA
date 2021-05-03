@@ -25,6 +25,7 @@ int main() {
     criaProd(sectores, produt, Nsector);
     criaArmazem(ap, produt);
     mostraArmazem(ap, produt);
+    mostraSector(sectores, produt, Nsector);
 
     char escolha;
     bool sair = false;
