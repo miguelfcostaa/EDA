@@ -8,7 +8,7 @@
 using namespace std;
 
 
-string* produtoss() {
+string* stock() {
 	ifstream produto("nomes.txt");
 	string l;
 	string* lines = new string[100];
@@ -26,12 +26,14 @@ string* produtoss() {
 
 
 armazem* criaArmazem(armazem* ap, prod* produt) {
-	string* lines = produtoss();
+	string* lines = stock();
 	for (int i = 0; i < 50; i++) {
 		ap[i].armazem_produtos = lines[i];
+		ap[i].n_produtos = i;
 	}
 	return ap;
 }
+
 
 /*
 void addProdutos(armazem* ap) {
@@ -39,3 +41,10 @@ void addProdutos(armazem* ap) {
 	armazem->stock = prod;
 }
 */
+
+void mostraArmazem(armazem* ap, prod* produt) {
+	for (int i = 0; i < 50; i++) {
+		cout << "Produto: " << ap[i].armazem_produtos;
+		cout << " | Preco: " << produt[i].preco << endl;
+	}
+}
