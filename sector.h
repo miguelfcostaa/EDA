@@ -19,7 +19,7 @@ struct prod {
 
 prod* criaProd(sector* sectores, prod* produt, int Nsector);
 //int prec(prod* produt);
-int prec(sector* sectores, prod* produt, int Nsector);
+int preco();
 
 sector* criasector(sector* sectores, int Nsector);
 void mostraSector(sector* sectores, prod* produt, int Nsector);
