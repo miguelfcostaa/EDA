@@ -9,9 +9,9 @@ using namespace std;
 
 //Ler o file dos produtos linha a linha
 string* produtos() {
-	ifstream produto("nome.txt");
+	ifstream produto("nomes.txt");
 	string l;
-	string* lines = new string[24];
+	string* lines = new string[100];
 	int i = 0;
 	if (produto.is_open()) {
 		while (getline(produto, l)) {
@@ -19,22 +19,25 @@ string* produtos() {
 			i++;
 		}
 		produto.close();
+
 	}
 	return lines;
 }
 
+int preco() {
+	int n = rand() % 40 + 1;
+	return n * 2;
+}
 
 prod* criaProd(sector* sectores, prod* produt, int Nsector) {
-	int n = rand() % 80 + 1;
 	for (int i = 0; i < Nsector; i++) {
 		for (int j = 0; j < sectores[i].Nproduto; i++) {
-			if (n % 2 == 0) {
-				produt[j].preco = n;
-				string* line = produtos();
-				produt[j].produto = line[i];
-			}
+			produt[j].preco = preco();
+			string* line = produtos();
+			produt[j].produto = line[i];
 		}
-	}	return produt;
+	}	
+	return produt;
 }
 
 
@@ -62,12 +65,13 @@ int Nproduto(sector* sectores, int Nsector) {
 
 //Ler a lista das areas
 string* areas() {
-	ifstream area("areas.txt");
+	ifstream area("area.txt");
 	string l;
-	string* line = new string[30];
+	string* line = new string[16];
 	int i = 0;
 	if (area.is_open()) {
 		while (getline(area, l)) {
+			//cout << "HELOOOO" << endl;
 			line[i] = l;
 			i++;
 		}
@@ -82,14 +86,10 @@ sector* criasector(sector* sectores, int Nsector) {
 	for (int i = 0; i < Nsector; i++) {
 		sectores[i].letra = letra[i];
 		string* name = nomes(sectores, i);
-		//sectores[i].nome = name[i];
 		sectores[i].capacidade = capacidade();
 		sectores[i].Nproduto = Nproduto(sectores, Nsector);
 		string* lines = areas();
-		//sectores[i].areas = lines[i];
-		cin.ignore();
-		cin.get();
-
+		sectores[i].areas = lines[i];
 	}
 	return sectores;
 }
@@ -104,5 +104,4 @@ void mostraSector(sector* sectores, prod* produt, int Nsector) {
 		}
 		cout << endl;
 	}
-	cin.ignore();
 }
