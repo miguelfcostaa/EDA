@@ -52,7 +52,7 @@ string* nomes(sector* sectores, int i) {
 
 //Dar a capacidade do sector
 int capacidade() {
-	int Ncapacidade = rand() % 10 + 5;
+	int Ncapacidade = rand() % 5 + 5;
 	return Ncapacidade;
 }
 
@@ -61,6 +61,7 @@ int Nproduto(sector* sectores, int Nsector) {
 		int Nprodutos = rand() % sectores[i].capacidade + 1;
 		return Nprodutos;
 	}
+	return 0;
 }
 
 
@@ -98,11 +99,14 @@ sector* criasector(sector* sectores, int Nsector) {
 
 //Funcao para mostrar os sectores
 void mostraSector(sector* sectores, prod* produt, int Nsector) {
+	cout << endl;
 	for (int i = 0; i < Nsector; i++) {
-	cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << endl;
+		cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << "  | " << endl;
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
-			cout << "Produto : " << produt[i].produto << "  |  Preço : " << produt[i].preco << endl;
+			cout << "Produto : " << produt[j].produto << "  |  Preço : " << produt[j].preco << " Euros" << endl;
+			cin.ignore();
 		}
-		cout << endl;
+		cout << endl << "-----------------------------------------------------" << endl;
 	}
+	cout << endl;
 }
