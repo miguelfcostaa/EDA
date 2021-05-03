@@ -26,7 +26,6 @@ int atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 }
 
 
-
 void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	bool sair = false;
 	char opcao;
@@ -53,7 +52,7 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 			//cout << endl;
 			break;
 		case '2':
-			atualizaPreco(sectores,Nsector,produt,ap);
+			atualizaPreco(sectores, Nsector, produt, ap);
 			break;
 		case '3':
 			//iniciaCamp();
