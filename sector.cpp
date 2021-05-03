@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 //Ler o file dos produtos linha a linha
 string* produtos() {
 	ifstream produto("nomes.txt");
@@ -24,22 +25,6 @@ string* produtos() {
 	return lines;
 }
 
-int preco() {
-	int n = rand() % 40 + 1;
-	return n * 2;
-}
-
-
-prod* criaProd(sector* sectores, prod* produt, int Nsector) {
-	for (int i = 0; i < Nsector; i++) {
-		for (int j = 0; j < sectores[i].Nproduto; i++) {
-			produt[j].preco = preco();
-			string* line = produtos();
-			produt[j].produto = line[i];
-		}
-	}	
-	return produt;
-}
 
 
 //Dar o nome do responsavel
@@ -82,6 +67,7 @@ string* areas() {
 	return line;
 }
 
+
 //Funcao para criar os sectores
 sector* criasector(sector* sectores, int Nsector) {
 	char* letra = new char[26]{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M' };
@@ -95,6 +81,18 @@ sector* criasector(sector* sectores, int Nsector) {
 	}
 	return sectores;
 }
+
+prod* criaProd(sector* sectores, prod* produt, int Nsector) {
+	for (int i = 0; i < Nsector; i++) {
+		for (int j = 0; j < sectores[i].Nproduto; j++) {
+			produt[j].preco = 2 * (rand() % 40 + 1);
+			string* line = produtos();
+			produt[j].produto = line[i];
+		}
+	}
+	return produt;
+}
+
 
 
 //Funcao para mostrar os sectores
