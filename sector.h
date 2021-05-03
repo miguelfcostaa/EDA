@@ -13,12 +13,11 @@ struct sector {
 };
 
 struct prod {
-    double preco;
+    int preco;
     string produto;
 };
 
 prod* criaProd(sector* sectores, prod* produt, int Nsector);
-//int prec(prod* produt);
 int preco();
 
 sector* criasector(sector* sectores, int Nsector);
