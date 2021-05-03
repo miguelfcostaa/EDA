@@ -101,7 +101,7 @@ sector* criasector(sector* sectores, int Nsector) {
 void mostraSector(sector* sectores, prod* produt, int Nsector) {
 	cout << endl;
 	for (int i = 0; i < Nsector; i++) {
-		cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << "  | " << endl;
+		cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << endl;
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
 			cout << "Produto : " << produt[j].produto << "  |  Preço : " << produt[j].preco << " Euros" << endl;
 			cin.ignore();
