@@ -29,6 +29,7 @@ int preco() {
 	return n * 2;
 }
 
+
 prod* criaProd(sector* sectores, prod* produt, int Nsector) {
 	for (int i = 0; i < Nsector; i++) {
 		for (int j = 0; j < sectores[i].Nproduto; i++) {
