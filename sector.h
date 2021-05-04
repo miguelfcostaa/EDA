@@ -34,8 +34,14 @@ struct prod {
     string fornecedores;
 };
 
+
+int fullcapacidade(sector* sectores, int Nsector);
+string* produtos();
+string* nomes(sector* sectores, int i);
+int capacidade();
+int Nproduto(sector* sectores, int Nsector);
+string* areas();
+sector* criasector(sector* sectores, int Nsector);
 prod* criaProd(sector* sectores, prod* produt, int Nsector);
 
-
-sector* criasector(sector* sectores, int Nsector);
 void mostraSector(sector* sectores, prod* produt, int Nsector);
