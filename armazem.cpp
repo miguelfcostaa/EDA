@@ -42,9 +42,11 @@ void addProdutos(armazem* ap) {
 }
 */
 
+
+//ERRO
 void mostraArmazem(armazem* ap, prod* produt) {
 	for (int i = 0; i < 50; i++) {
 		cout << "Produto: " << ap[i].armazem_produtos;
-		cout << " | Preco: " << ap[i].preco << endl;
+		cout << " | Preco: " << produt[i].preco << endl;
 	}
 }
