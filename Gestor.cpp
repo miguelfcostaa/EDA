@@ -25,6 +25,64 @@ int atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	return 0;
 }
 
+void removeProd(prod* produt, armazem* ap) {
+	string nomeaux;
+	cout << "Introduza o produto que deseja eleminar: " << endl;
+	cin >> nomeaux;
+	for (int i = 0; i < ap[i].n_produtos; i++) {//o ap[i].n_produtos nao faz sentido algum 
+		if (ap[i].armazem_produtos == nomeaux) {
+			ap[i].armazem_produtos = "Vazio";
+			ap[i].preco = 0;
+		}
+	}
+}
+
+void iniciarCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A duraçao 
+	int desconto;
+	string nomeaux;
+	int duracao;
+	cout << "Selecione a area para a campanha: ";
+	cin >> nomeaux;
+	cout << endl << "Introduza o valor do desconto (valores entre 0 e 100): ";
+	cin >> desconto;
+	cout << endl << "Selecione a duraçao da campanha: ";
+	cin >> duracao;
+	for (int i = 0; i < Nsector; i++) {
+		if (sectores[i].areas == nomeaux) {
+			produt[i].preco = produt[i].preco * ((100 - desconto) / 100);
+		}
+	}
+}
+
+void imprimeProdutos() {
+	string* impressao = new string();
+	bool sair = false;
+	char opcao;
+	do {
+		cout << "Impressao de produtos" << endl;
+		cout << "(1) - Por ordem alfabetica!" << endl;
+		cout << "(2) - Por ordem de preco!" << endl;
+		cout << "(0) - Voltar!" << endl;
+		cin >> opcao;
+		cout << endl;
+		switch (opcao) {
+		case '1':
+			//ordemAlfabetica();
+			break;
+		case '2':
+			//ordemPreco();
+			break;
+		case '0':
+			sair = true;
+			break;
+		default:
+			cout << "Escolha uma opçao valida!" << endl;
+			break;
+		}
+	} while (!sair);
+}
+
+
 
 void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	bool sair = false;
@@ -47,9 +105,7 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 		cout << endl;
 		switch (opcao) {
 		case '1':
-			//removeProd();
-			//cout << "Qual é o produto que pertende remover: ";
-			//cout << endl;
+			removeProd(produt, ap);
 			break;
 		case '2':
 			atualizaPreco(sectores, Nsector, produt, ap);
