@@ -82,13 +82,19 @@ sector* criasector(sector* sectores, int Nsector) {
 	return sectores;
 }
 
-prod* criaProd(sector* sectores, prod* produt, int Nsector) {
+int fullcapacidade(sector* sectores, int Nsector) {
+	int aux = 0;
 	for (int i = 0; i < Nsector; i++) {
-		for (int j = 0; j < sectores[i].Nproduto; j++) {
-			produt[j].preco = 2 * (rand() % 40 + 1);
+		aux = aux + sectores[i].capacidade;
+	}
+	return aux;
+}
+
+prod* criaProd(sector* sectores, prod* produt, int Nsector) {
+	for (int i = 0; i < fullcapacidade(sectores,Nsector); i++) {
+			produt[50].preco = 2 * (rand() % 40 + 1);
 			string* line = produtos();
-			produt[j].produto = line[i];
-		}
+			produt[0].produto = line[i];
 	}
 	return produt;
 }
@@ -101,7 +107,8 @@ void mostraSector(sector* sectores, prod* produt, int Nsector) {
 	for (int i = 0; i < Nsector; i++) {
 		cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << endl;
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
-			cout << "Produto : " << produt[j].produto << "  |  Preço : " << produt[j].preco << " Euros" << endl;
+			cout << "Produto : " << produt[j].produto;
+			cout << "  |  Preço : " << produt[j].preco << " Euros" << endl;
 			cin.ignore();
 		}
 		cout << endl << "-----------------------------------------------------" << endl;
