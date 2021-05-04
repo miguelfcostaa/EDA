@@ -45,6 +45,6 @@ void addProdutos(armazem* ap) {
 void mostraArmazem(armazem* ap, prod* produt) {
 	for (int i = 0; i < 50; i++) {
 		cout << "Produto: " << ap[i].armazem_produtos;
-		cout << " | Preco: " << produt[i].preco << endl;
+		cout << " | Preco: " << ap[i].preco << endl;
 	}
 }
