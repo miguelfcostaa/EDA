@@ -3,6 +3,23 @@
 
 using namespace std;
 
+/*
+struct sector {
+    struct prod {
+        prod* preco = 0;
+        string produto = "Vazio";
+        string fornecedores;
+    };
+    char letra = ' ';
+    string areas;
+    string nome;
+    int capacidade = 0;
+    int Nproduto = 0;
+};
+
+sector::prod* novo = new sector::prod();
+*/
+
 struct sector {
     char letra = ' ';
     string areas;
