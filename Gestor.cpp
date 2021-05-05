@@ -1,7 +1,7 @@
 #include <iostream>
 #include < stdlib.h >
 #include <time.h>
-#include "Gestor.h"
+#include "gestor.h"
 #include <fstream>
 #include <string>
 #include "sector.h"
@@ -141,4 +141,3 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	} while (!sair);
 
 }
-
