@@ -25,11 +25,12 @@ string* stock() {
 }
 
 
-armazem* criaArmazem(armazem* ap, prod* produt) {
+armazem* criaArmazem(armazem* ap) {
 	string* lines = stock();
 	for (int i = 0; i < 50; i++) {
 		ap[i].armazem_produtos = lines[i];
 		ap[i].n_produtos = i;
+		ap[i].preco = preco();
 	}
 	return ap;
 }
@@ -42,11 +43,9 @@ void addProdutos(armazem* ap) {
 }
 */
 
-
-//ERRO
 void mostraArmazem(armazem* ap, prod* produt) {
 	for (int i = 0; i < 50; i++) {
 		cout << "Produto: " << ap[i].armazem_produtos;
-		cout << " | Preco: " << produt[i].preco << endl;
+		cout << " | Preço: " << ap[i].preco << endl;
 	}
 }
