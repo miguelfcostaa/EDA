@@ -1,10 +1,12 @@
 #include <iostream>
 #include <stdlib.h>
+#include <iostream>
+#include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 #include <locale>
 #include <string>
-#include "Gestor.h"
+#include "gestor.h"
 #include "sector.h"
 #include "armazem.h"
 
@@ -21,9 +23,10 @@ int main() {
     prod* produt = new prod; //criar object para a struct produtos
     armazem* ap = new armazem[50]; //criar object para a struct armazem
 
-    criasector(sectores, Nsector);    //criar os sectores antes de mostrar
-    criaProd(sectores, produt, Nsector);
-    criaArmazem(ap, produt);
+    criasector(sectores, Nsector);    //criar os sectores antes de 
+    criaArmazem(ap);          //criar o armazem
+    cout << endl;
+
     mostraArmazem(ap, produt);
     mostraSector(sectores, produt, Nsector);
 
