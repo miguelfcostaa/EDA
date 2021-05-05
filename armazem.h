@@ -9,6 +9,6 @@ struct armazem {
 	int preco = 0;
 };
 
-armazem* criaArmazem(armazem* ap, prod* produt);
+armazem* criaArmazem(armazem* ap);
 string* stock();
 void mostraArmazem(armazem* ap, prod* produt);
