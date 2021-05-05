@@ -25,8 +25,6 @@ string* produtos() {
 	return lines;
 }
 
-
-
 //Dar o nome do responsavel
 string* nomes(sector* sectores, int i) {
 	string* nome = new string[30];
@@ -35,11 +33,13 @@ string* nomes(sector* sectores, int i) {
 	return nome;
 }
 
+
 //Dar a capacidade do sector
 int capacidade() {
 	int Ncapacidade = rand() % 5 + 5;
 	return Ncapacidade;
 }
+
 
 int Nproduto(sector* sectores, int Nsector) {
 	for (int i = 0; i < Nsector; i++) {
@@ -47,6 +47,12 @@ int Nproduto(sector* sectores, int Nsector) {
 		return Nprodutos;
 	}
 	return 0;
+}
+
+
+int preco() {
+	int n = rand() % 40 + 1;
+	return n * 2;
 }
 
 
@@ -58,7 +64,6 @@ string* areas() {
 	int i = 0;
 	if (area.is_open()) {
 		while (getline(area, l)) {
-			//cout << "HELOOOO" << endl;
 			line[i] = l;
 			i++;
 		}
@@ -82,36 +87,43 @@ sector* criasector(sector* sectores, int Nsector) {
 	return sectores;
 }
 
-int fullcapacidade(sector* sectores, int Nsector) {
+
+int fullcap(sector*sectores,int Nsector) {
 	int aux = 0;
 	for (int i = 0; i < Nsector; i++) {
 		aux = aux + sectores[i].capacidade;
 	}
+	cout << aux << endl;
 	return aux;
 }
 
-prod* criaProd(sector* sectores, prod* produt, int Nsector) {
-	for (int i = 0; i < fullcapacidade(sectores,Nsector); i++) {
-			produt[50].preco = 2 * (rand() % 40 + 1);
-			string* line = produtos();
-			produt[0].produto = line[i];
+
+prod* criaProd(prod*produt,sector*sectores,int Nsector) {
+	string* nomep = produtos();
+	//string* area = areas();
+	for (int i = 0; i < fullcap(sectores,Nsector); i++) {
+		int z = rand() % 100;
+		//int x = rand() % 15;
+		//int w = rand() % 16;
+		produt[i].produto = nomep[z];
+		produt[i].preco = preco();
 	}
 	return produt;
 }
 
 
-
 //Funcao para mostrar os sectores
 void mostraSector(sector* sectores, prod* produt, int Nsector) {
 	cout << endl;
+	int aux = 0;
 	for (int i = 0; i < Nsector; i++) {
 		cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << endl;
-		for (int j = 0; j < sectores[i].Nproduto; j++) {
-			cout << "Produto : " << produt[j].produto;
-			cout << "  |  Preço : " << produt[j].preco << " Euros" << endl;
+		aux = aux + sectores[i].Nproduto;
+		for (int j = 0; j < aux; j++) {
+			cout << "Produto : " << produt[j].produto << "  |  Preço : " << produt[j].preco << " Euros" << endl;
 			cin.ignore();
 		}
-		cout << endl << "-----------------------------------------------------" << endl;
+		cout << endl << "-------------------------------" << endl;
 	}
 	cout << endl;
 }
