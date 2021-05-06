@@ -55,7 +55,21 @@ void iniciarCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A dur
 	}
 }
 
-
+void ordenaA() {
+	char str[20];
+	cin >> str;
+	int len = strlen(str);
+	for (int i = 0; i < len; i++) {
+		for (int j = i + 1; j < len; j++) {
+			if (str[i] > str[j]) {
+				char temp = str[i];
+				str[i] = str[j];
+				str[j] = temp;
+			}
+		}
+	}
+	cout << str;
+}
 
 void imprimeProdutos() {
 	string* impressao = new string();
