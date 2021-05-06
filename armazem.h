@@ -11,4 +11,4 @@ struct armazem {
 
 armazem* criaArmazem(armazem* ap);
 string* stock();
-void mostraArmazem(armazem* ap, prod* produt);
+void mostraArmazem(armazem* ap);
