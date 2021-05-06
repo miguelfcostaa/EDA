@@ -1,9 +1,10 @@
 #include <iostream>
 #include < stdlib.h >
 #include <time.h>
-#include "gestor.h"
 #include <fstream>
 #include <string>
+#include "armazem.h"
+#include "gestor.h"
 #include "sector.h"
 #include "armazem.h"
 
@@ -53,6 +54,8 @@ void iniciarCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A dur
 		}
 	}
 }
+
+
 
 void imprimeProdutos() {
 	string* impressao = new string();
