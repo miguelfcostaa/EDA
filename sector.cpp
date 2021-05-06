@@ -3,6 +3,8 @@
 #include <time.h>
 #include <fstream>
 #include <string>
+#include "gestor.h"
+#include "armazem.h"
 #include "sector.h"
 
 using namespace std;
@@ -23,6 +25,21 @@ string* produtos() {
 
 	}
 	return lines;
+}
+
+string* fornecedores() { // retorna uma lista com os fornecedores
+	ifstream pFicheiro("fornecedores.txt");
+	string p;
+	string* list = new string[16];
+	int i = 0;
+	if (pFicheiro.is_open()) {
+		while (getline(pFicheiro, p)) {
+			list[i] = p;
+			i++;
+		}
+		pFicheiro.close();
+	}
+	return list;
 }
 
 //Dar o nome do responsavel
@@ -74,43 +91,25 @@ string* areas() {
 
 
 //Funcao para criar os sectores
-sector* criasector(sector* sectores, int Nsector) {
+sector* criasector(sector* sectores, int Nsector,prod*produt,armazem*ap) {
+	int aux = 0;
 	char* letra = new char[26]{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M' };
 	for (int i = 0; i < Nsector; i++) {
+		string* lines = areas();
+		//string* produ = produtos();
 		sectores[i].letra = letra[i];
 		string* name = nomes(sectores, i);
 		sectores[i].capacidade = capacidade();
 		sectores[i].Nproduto = Nproduto(sectores, Nsector);
-		string* lines = areas();
 		sectores[i].areas = lines[i];
+		aux = aux + sectores[i].Nproduto;
+		for (int j = 0; j < aux; j++) {
+			sectores[i].prods = removeProdArm(ap, produt);
+			//produt[j].preco = preco();
+		}
 	}
 	return sectores;
 }
-
-
-int fullcap(sector*sectores,int Nsector) {
-	int aux = 0;
-	for (int i = 0; i < Nsector; i++) {
-		aux = aux + sectores[i].capacidade;
-	}
-	cout << aux << endl;
-	return aux;
-}
-
-
-prod* criaProd(prod*produt,sector*sectores,int Nsector) {
-	string* nomep = produtos();
-	//string* area = areas();
-	for (int i = 0; i < fullcap(sectores,Nsector); i++) {
-		int z = rand() % 100;
-		//int x = rand() % 15;
-		//int w = rand() % 16;
-		produt[i].produto = nomep[z];
-		produt[i].preco = preco();
-	}
-	return produt;
-}
-
 
 //Funcao para mostrar os sectores
 void mostraSector(sector* sectores, prod* produt, int Nsector) {
