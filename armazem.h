@@ -1,14 +1,12 @@
 #pragma once
+#include "sector.h"
 #include <string>
 
 using namespace std;
 
-struct armazem {
-	string armazem_produtos = "Vazio";
-	int n_produtos = 0;
-	int preco = 0;
-};
-
 armazem* criaArmazem(armazem* ap);
 string* stock();
-void mostraArmazem(armazem* ap);
+int n_produtos(int n, int m);
+void mostraArmazem(armazem* ap, prod* produt);
+void removeProdutos(armazem* ap);
+prod* removeProdArm(armazem*ap,prod*produt);
