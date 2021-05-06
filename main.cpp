@@ -6,9 +6,9 @@
 #include <time.h>
 #include <locale>
 #include <string>
-#include "gestor.h"
-#include "sector.h"
 #include "armazem.h"
+#include "sector.h"
+#include "gestor.h"
 
 
 using namespace std;
@@ -17,17 +17,17 @@ int main() {
     locale::global(locale(""));
 
     srand((unsigned int)time(NULL));
-    int Nsector = rand() % 5 + 8;    //numero random de 8 a 12
+    int Nsector = rand() % 5 + 8;                //numero random de 8 a 12
 
-    sector* sectores = new sector[Nsector];    //criar object para a struct sectores
-    prod* produt = new prod; //criar object para a struct produtos
-    armazem* ap = new armazem[50]; //criar object para a struct armazem
+    sector* sectores = new sector[Nsector];      //criar object para a struct sectores
+    prod* produt = new prod[100];                     //criar object para a struct produtos
+    armazem* ap = new armazem[100];               //criar object para a struct armazem
 
-    criasector(sectores, Nsector);    //criar os sectores antes de 
-    criaArmazem(ap);          //criar o armazem
+    criasector(sectores, Nsector,produt,ap);        //criar os sectores antes de 
+    criaArmazem(ap);                             //criar o armazem
     cout << endl;
 
-    mostraArmazem(ap);
+    mostraArmazem(ap, produt);
     mostraSector(sectores, produt, Nsector);
 
     char escolha;
