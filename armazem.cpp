@@ -19,7 +19,6 @@ string* stock() {
 			i++;
 		}
 		produto.close();
-
 	}
 	return lines;
 }
