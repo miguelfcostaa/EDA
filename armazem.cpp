@@ -43,7 +43,7 @@ void addProdutos(armazem* ap) {
 }
 */
 
-void mostraArmazem(armazem* ap, prod* produt) {
+void mostraArmazem(armazem* ap) {
 	for (int i = 0; i < 50; i++) {
 		cout << "Produto: " << ap[i].armazem_produtos;
 		cout << " | Preço: " << ap[i].preco << endl;
