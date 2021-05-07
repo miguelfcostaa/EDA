@@ -24,9 +24,9 @@ int main() {
     armazem* ap = criaArmazem();             //criar object para a struct armazem
 
     criasector(sectores, Nsector, produt, ap);        //criar os sectores antes de                              
-    cout << endl;
 
     mostraArmazem(ap);
+    cout << endl;
     mostraSector(sectores, produt, Nsector);
 
     char escolha;
@@ -37,6 +37,10 @@ int main() {
         switch (escolha) {
         case 's':
             mostraSector(sectores, produt, Nsector);
+            mostraArmazem(ap);
+            addProdutos(ap);
+            prodVend(sectores, Nsector);
+            addProdutos(ap);
             break;
         case 'g':
             gestor(sectores, Nsector, produt, ap);
