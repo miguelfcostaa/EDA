@@ -7,41 +7,45 @@
 #include "gestor.h"
 #include "sector.h"
 #include "armazem.h"
+#include <algorithm>
+#include <iomanip>
 
 using namespace std;
 
-void removeProd(sector* sectores, prod* produt, armazem* ap, int Nsector) {
+
+
+void removeProd(armazem* ap, int Nsector, sector* sectores) {
 	string nomeaux;
 	cout << "Introduza o produto que deseja eleminar: " << endl;
 	cin >> nomeaux;
 	for (int i = 0; i < Nsector; i++) {
-		for (int j = 0; j < ap->n_produtos; j++) {
+		for (int j = 0; j < sectores[i].Nproduto; j++) {
 			if (sectores[i].prods[j].produto == nomeaux) {
-				sectores[i].prods[j].produto = sectores[i].prods[j+1].produto;
-				sectores[i].prods[j].preco = sectores[i].prods[j+1].preco;
+				sectores[i].prods[j].produto = sectores[i].prods[j + 1].produto;
+				sectores[i].prods[j].preco = sectores[i].prods[j + 1].preco;
 				sectores[i].Nproduto--;
 			}
+
 		}
 	}
 }
 
-armazem* atualizaPreco(armazem* ap, int Nsector) {
+armazem* atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	string nomeaux;
-	for (int i = 0; i < Nsector; i++) {
-		cout << "Introduza o nome do produto: ";
-		cin >> nomeaux;
-		if (nomeaux == ap->armazem_produtos[i].produto) {
-			cout << "Introduza um novo valor para o produto: ";
-			cin >> ap->armazem_produtos[i].preco;
+	int novopreco;
+	cout << "Introduza o nome do produto: ";
+	cin >> nomeaux;
+	cout << "Introduza um novo valor para o produto: ";
+	cin >> novopreco;
+	for (int i = 0; i < ap->n_produtos; i++) {
+		if (ap->prodarm[i].produto == nomeaux) {
+			ap->prodarm[i].preco = novopreco;
 		}
-		else
-			cout << "Nao existe esse produto no armazem." << endl;
 	}
 	return ap;
 }
 
-
-void iniciarCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A duraçao 
+void iniciaCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A duraçao 
 	int desconto;
 	string nomeaux;
 	int duracao;
@@ -60,7 +64,7 @@ void iniciarCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A dur
 
 
 
-void imprimeProdutos() {
+void imprimeProdutos(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	string* impressao = new string();
 	bool sair = false;
 	char opcao;
@@ -73,7 +77,7 @@ void imprimeProdutos() {
 		cout << endl;
 		switch (opcao) {
 		case '1':
-			//ordemAlfabetica();
+			ordemAlfabetica(sectores,Nsector,produt,ap);
 			break;
 		case '2':
 			//ordemPreco();
@@ -88,6 +92,41 @@ void imprimeProdutos() {
 	} while (!sair);
 }
 
+void ordemAlfabetica(sector* sectores, int Nsector, prod* produt, armazem* ap) {
+	int j = 0;
+	bool swap = true;
+	sector* temp = new sector;
+	while (swap) {
+		swap = false;
+		j++;
+		for (int l = 0; l < Nsector - j; l++)
+		{
+			if (produt[l].produto > produt[l + 1].produto) {
+				*temp = sectores[l];
+				sectores[l] = sectores[l + 1];
+				sectores[l + 1] = *temp;
+				swap = true;
+
+			}
+
+		}
+	}
+	delete temp;
+	mostraSector(sectores, produt, Nsector);
+}
+
+/*
+void gravarsuper(string lista, sector* sectores, int Nsector, prod* produt) {
+	fstream lista;
+	string res = to_string(Nsector) + "\n";
+	for (int i = 0; i < Nsector; i++) {
+		res = res + sectores[i].letra + "|" + produt[i].produto + " " + to_string(produt[i].preco) + "|" + to_string(sectores[i].capacidade) + "|" + to_string(sectores[i].Nproduto) + "\n";
+	}
+	lista.open(lista, ifstream::out);
+	ficheiro << res;
+	ficheiro.close();
+}
+*/
 
 
 void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
@@ -111,10 +150,12 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 		cout << endl;
 		switch (opcao) {
 		case '1':
-			removeProd(produt, ap);
+			removeProd(ap,Nsector,sectores);
+			
 			break;
 		case '2':
-			atualizaPreco(ap, Nsector);
+			atualizaPreco(sectores, Nsector,produt, ap);
+			cout << endl;
 			break;
 		case '3':
 			//iniciaCamp();
@@ -126,7 +167,7 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 			//carregaSuper();
 			break;
 		case '6':
-			//imprimeProd();
+			imprimeProdutos(sectores, Nsector, produt, ap);
 			break;
 		case '7':
 			//novaArea();
