@@ -1,10 +1,10 @@
-#include <stdlib.h>
-#include<iostream>
-#include <time.h>
-#include <fstream>
-#include <string>
-#include "gestor.h"
 #include "armazem.h"
+#include <stdlib.h>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <algorithm>
+#include <iomanip>
 #include "sector.h"
 
 using namespace std;
@@ -51,22 +51,6 @@ string* nomes(sector* sectores, int i) {
 }
 
 
-//Dar a capacidade do sector
-int capacidade() {
-	int Ncapacidade = rand() % 5 + 5;
-	return Ncapacidade;
-}
-
-
-int Nproduto(sector* sectores, int Nsector) {
-	for (int i = 0; i < Nsector; i++) {
-		int Nprodutos = rand() % sectores[i].capacidade + 1;
-		return Nprodutos;
-	}
-	return 0;
-}
-
-
 int preco() {
 	int n = rand() % 40 + 1;
 	return n * 2;
@@ -75,7 +59,7 @@ int preco() {
 
 //Ler a lista das areas
 string* areas() {
-	ifstream area("area.txt");
+	ifstream area("areas.txt");
 	string l;
 	string* line = new string[16];
 	int i = 0;
@@ -93,42 +77,25 @@ string* areas() {
 //Funcao para criar os sectores
 sector* criasector(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	int aux = 0;
+	int capacidade; int Nproduto;
 	char* letra = new char[26]{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M' };
 	for (int i = 0; i < Nsector; i++) {
+		capacidade = rand() % 5 + 5;
+		Nproduto = rand() % capacidade + 1;
 		int a = rand() % 16;
-		int b = rand() % 100;
-		string* area = areas();
+		string* lines = areas();
 		string* produ = produtos();
 		sectores[i].letra = letra[i];
 		string* name = nomes(sectores, i);
-		sectores[i].capacidade = capacidade();
-		sectores[i].Nproduto = Nproduto(sectores, Nsector);
-		sectores[i].areas = area[a];
-		aux = aux + sectores[i].Nproduto;
-		for (int j = 0; j < aux; j++) {
-			//sectores[i].prods = removeProdArm(ap, produt);
-			produt[i].produto = produ[a];
-			produt[j].preco = preco();
-		}
+		sectores[i].capacidade = capacidade;
+		sectores[i].Nproduto = Nproduto;
+		sectores[i].areas = lines[a];
+		sectores[i].prods = removeProdArm(ap,Nproduto,produt,sectores);
+		produt[i].preco = preco();
 	}
 	return sectores;
 }
 
-prod* criaProdutos(armazem* ap, int Nproduts) {
-	prod* produts = new prod[Nproduts];
-	string* nomep = produtos();
-	string* fornecedor = fornecedores();
-	string* area = areas();
-	for (int i = 0; i < Nproduts; i++) {
-		int n = rand() % 100; int f = rand() % 15;
-		produts[i].produto = nomep[n];
-		produts[i].fornecedores = fornecedor[f];
-		produts[i].preco = preco();
-		//produts[i].vendido = false;
-		ap->n_produtos++;
-	}
-	return produts;
-}
 
 //Funcao para mostrar os sectores
 void mostraSector(sector* sectores, prod* produt, int Nsector) {
@@ -137,7 +104,7 @@ void mostraSector(sector* sectores, prod* produt, int Nsector) {
 	for (int i = 0; i < Nsector; i++) {
 		cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << endl;
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
-			cout << "Produto : " << produt[j].produto << "  |  Preço : " << produt[j].preco << " Euros" << endl;
+			cout << "Produto : " << sectores[i].prods[j].produto << "  |  Preço : " << sectores[i].prods[j].preco << " Euros" << endl;
 		}
 		cout << endl << "-------------------------------" << endl;
 	}
