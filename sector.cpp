@@ -59,7 +59,7 @@ int preco() {
 
 //Ler a lista das areas
 string* areas() {
-	ifstream area("areas.txt");
+	ifstream area("area.txt");
 	string l;
 	string* line = new string[16];
 	int i = 0;
@@ -73,6 +73,20 @@ string* areas() {
 	return line;
 }
 
+void prodVend(sector* sectores, int Nsector) {
+	int vend;  //probailidade de 25% 
+	for (int i = 0; i < Nsector; i++) {
+		for (int j = 0; j < sectores[i].Nproduto; j++) {
+			vend = rand() % 4 + 1;
+			if (vend == 1) {
+				sectores[i].prods[j].vendido = true;
+				sectores[i].prods[j].vendido = sectores[i].prods[j + 1].vendido;
+				sectores[i].Nproduto--;
+			}
+		}
+	}
+
+}
 
 //Funcao para criar os sectores
 sector* criasector(sector* sectores, int Nsector, prod* produt, armazem* ap) {
@@ -102,11 +116,15 @@ void mostraSector(sector* sectores, prod* produt, int Nsector) {
 	cout << endl;
 	int aux = 0;
 	for (int i = 0; i < Nsector; i++) {
-		cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << endl;
+		cout << endl << "Sector : " << sectores[i].letra << "  | ";
+		cout << "Responsavel: " << sectores[i].nome << " | ";
+		cout << "Capacidade: " << sectores[i].capacidade << " | ";
+		cout << "Produtos: " << sectores[i].Nproduto << " | ";
+		cout << "Área: " << sectores[i].areas << endl;
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
 			cout << "Produto : " << sectores[i].prods[j].produto << "  |  Preço : " << sectores[i].prods[j].preco << " Euros" << endl;
 		}
-		cout << endl << "-------------------------------" << endl;
+		cout << endl << "------------------------------------------------------------------------------" << endl;
 	}
 	cout << endl;
 }
