@@ -114,6 +114,22 @@ sector* criasector(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	return sectores;
 }
 
+prod* criaProdutos(armazem* ap, int Nproduts) {
+	prod* produts = new prod[Nproduts];
+	string* nomep = produtos();
+	string* fornecedor = fornecedores();
+	string* area = areas();
+	for (int i = 0; i < Nproduts; i++) {
+		int n = rand() % 100; int f = rand() % 15;
+		produts[i].produto = nomep[n];
+		produts[i].fornecedores = fornecedor[f];
+		produts[i].preco = preco();
+		//produts[i].vendido = false;
+		ap->n_produtos++;
+	}
+	return produts;
+}
+
 //Funcao para mostrar os sectores
 void mostraSector(sector* sectores, prod* produt, int Nsector) {
 	cout << endl;
