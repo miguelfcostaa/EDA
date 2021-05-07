@@ -51,7 +51,7 @@ int n_produtos(int n, int m) {
 	return n_produtos;
 }
 
-void mostraArmazem(armazem* ap, prod* produt) {
+void mostraArmazem(armazem* ap) {
 	for (int i = 0; i < n_produtos(50,0); i++) {
 		cout << "Produto: " << ap[i].armazem_produtos;
 		cout << " | Preço: " << ap[i].preco << endl;
