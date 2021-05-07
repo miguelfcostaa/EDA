@@ -91,7 +91,7 @@ string* areas() {
 
 
 //Funcao para criar os sectores
-sector* criasector(sector* sectores, int Nsector,prod*produt,armazem*ap) {
+sector* criasector(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	int aux = 0;
 	char* letra = new char[26]{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M' };
 	for (int i = 0; i < Nsector; i++) {
@@ -118,8 +118,7 @@ void mostraSector(sector* sectores, prod* produt, int Nsector) {
 	int aux = 0;
 	for (int i = 0; i < Nsector; i++) {
 		cout << "Sector : " << sectores[i].letra << "  |  Responsavel : " << sectores[i].nome << "  |  Capacidade : " << sectores[i].capacidade << "  |  Produtos : " << sectores[i].Nproduto << "  |  Área : " << sectores[i].areas << endl;
-		aux = aux + sectores[i].Nproduto;
-		for (int j = 0; j < aux; j++) {
+		for (int j = 0; j < sectores[i].Nproduto; j++) {
 			cout << "Produto : " << produt[j].produto << "  |  Preço : " << produt[j].preco << " Euros" << endl;
 		}
 		cout << endl << "-------------------------------" << endl;
