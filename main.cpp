@@ -27,7 +27,7 @@ int main() {
     criaArmazem(ap);                             //criar o armazem
     cout << endl;
 
-    mostraArmazem(ap, produt);
+    mostraArmazem(ap);
     mostraSector(sectores, produt, Nsector);
 
     char escolha;
