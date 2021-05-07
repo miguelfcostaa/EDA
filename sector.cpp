@@ -95,17 +95,19 @@ sector* criasector(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	int aux = 0;
 	char* letra = new char[26]{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M' };
 	for (int i = 0; i < Nsector; i++) {
-		string* lines = areas();
+		int a = rand() % 16;
+		int b = rand() % 100;
+		string* area = areas();
 		string* produ = produtos();
 		sectores[i].letra = letra[i];
 		string* name = nomes(sectores, i);
 		sectores[i].capacidade = capacidade();
 		sectores[i].Nproduto = Nproduto(sectores, Nsector);
-		sectores[i].areas = lines[i];
+		sectores[i].areas = area[a];
 		aux = aux + sectores[i].Nproduto;
 		for (int j = 0; j < aux; j++) {
 			//sectores[i].prods = removeProdArm(ap, produt);
-			produt[i].produto = produ[i];
+			produt[i].produto = produ[a];
 			produt[j].preco = preco();
 		}
 	}
