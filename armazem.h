@@ -4,9 +4,9 @@
 
 using namespace std;
 
-armazem* criaArmazem(armazem* ap);
 string* stock();
-int n_produtos(int n, int m);
+armazem* criaArmazem();
+void addProdutos(armazem* ap);
 void mostraArmazem(armazem* ap);
 void removeProdutos(armazem* ap);
-prod* removeProdArm(armazem*ap,prod*produt);
+prod* removeProdArm(armazem* ap, int Nproduto, prod* produt, sector* sectores);
