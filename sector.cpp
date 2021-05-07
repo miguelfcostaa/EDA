@@ -96,7 +96,7 @@ sector* criasector(sector* sectores, int Nsector,prod*produt,armazem*ap) {
 	char* letra = new char[26]{ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M' };
 	for (int i = 0; i < Nsector; i++) {
 		string* lines = areas();
-		//string* produ = produtos();
+		string* produ = produtos();
 		sectores[i].letra = letra[i];
 		string* name = nomes(sectores, i);
 		sectores[i].capacidade = capacidade();
@@ -104,8 +104,9 @@ sector* criasector(sector* sectores, int Nsector,prod*produt,armazem*ap) {
 		sectores[i].areas = lines[i];
 		aux = aux + sectores[i].Nproduto;
 		for (int j = 0; j < aux; j++) {
-			sectores[i].prods = removeProdArm(ap, produt);
-			//produt[j].preco = preco();
+			//sectores[i].prods = removeProdArm(ap, produt);
+			produt[i].produto = produ[i];
+			produt[j].preco = preco();
 		}
 	}
 	return sectores;
@@ -120,7 +121,6 @@ void mostraSector(sector* sectores, prod* produt, int Nsector) {
 		aux = aux + sectores[i].Nproduto;
 		for (int j = 0; j < aux; j++) {
 			cout << "Produto : " << produt[j].produto << "  |  Preço : " << produt[j].preco << " Euros" << endl;
-			cin.ignore();
 		}
 		cout << endl << "-------------------------------" << endl;
 	}
