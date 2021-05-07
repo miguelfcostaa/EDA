@@ -1,13 +1,15 @@
 #pragma once
+#include <string>
 #include "sector.h"
 #include "armazem.h"
 
-void removeProd(prod* produt, armazem* ap);
-int atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap);
+void removeProd(armazem* ap, int Nsector, sector* sectores);
+armazem* atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap);
 void iniciarCampanha(int Nsector, sector* sectores, prod* produt);
+void ordemAlfabetica(sector* sectores, int Nsector, prod* produt, armazem* ap);
 //void gravarSuper();
 //void carregaSuper();
-void imprimeProdutos();
+void imprimeProdutos(sector* sectores, int Nsector, prod* produt, armazem* ap);
 //void novaArea();
 //void MostraReg();
 //void alteraArea();
