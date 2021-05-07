@@ -20,11 +20,10 @@ int main() {
     int Nsector = rand() % 5 + 8;                //numero random de 8 a 12
 
     sector* sectores = new sector[Nsector];      //criar object para a struct sectores
-    prod* produt = new prod[100];                     //criar object para a struct produtos
-    armazem* ap = new armazem[100];               //criar object para a struct armazem
+    prod* produt = new prod;                     //criar object para a struct produtos
+    armazem* ap = criaArmazem();             //criar object para a struct armazem
 
-    criasector(sectores, Nsector,produt,ap);        //criar os sectores antes de 
-    criaArmazem(ap);                             //criar o armazem
+    criasector(sectores, Nsector, produt, ap);        //criar os sectores antes de                              
     cout << endl;
 
     mostraArmazem(ap);
