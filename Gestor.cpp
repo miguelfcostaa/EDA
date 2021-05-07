@@ -10,33 +10,36 @@
 
 using namespace std;
 
+void removeProd(sector* sectores, prod* produt, armazem* ap, int Nsector) {
+	string nomeaux;
+	cout << "Introduza o produto que deseja eleminar: " << endl;
+	cin >> nomeaux;
+	for (int i = 0; i < Nsector; i++) {
+		for (int j = 0; j < ap->n_produtos; j++) {
+			if (sectores[i].prods[j].produto == nomeaux) {
+				sectores[i].prods[j].produto = sectores[i].prods[j+1].produto;
+				sectores[i].prods[j].preco = sectores[i].prods[j+1].preco;
+				sectores[i].Nproduto--;
+			}
+		}
+	}
+}
 
-int atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap) {
+armazem* atualizaPreco(armazem* ap, int Nsector) {
 	string nomeaux;
 	for (int i = 0; i < Nsector; i++) {
 		cout << "Introduza o nome do produto: ";
 		cin >> nomeaux;
-		if (nomeaux == ap[i].armazem_produtos) {
+		if (nomeaux == ap->armazem_produtos[i].produto) {
 			cout << "Introduza um novo valor para o produto: ";
-			cin >> produt[i].preco;
+			cin >> ap->armazem_produtos[i].preco;
 		}
 		else
 			cout << "Nao existe esse produto no armazem." << endl;
 	}
-	return 0;
+	return ap;
 }
 
-void removeProd(prod* produt, armazem* ap) {
-	string nomeaux;
-	cout << "Introduza o produto que deseja eleminar: " << endl;
-	cin >> nomeaux;
-	for (int i = 0; i < ap[i].n_produtos; i++) {//o ap[i].n_produtos nao faz sentido algum 
-		if (ap[i].armazem_produtos == nomeaux) {
-			ap[i].armazem_produtos = "Vazio";
-			ap[i].preco = 0;
-		}
-	}
-}
 
 void iniciarCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A duraçao 
 	int desconto;
@@ -55,21 +58,7 @@ void iniciarCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A dur
 	}
 }
 
-void ordenaA() {
-	char str[20];
-	cin >> str;
-	int len = strlen(str);
-	for (int i = 0; i < len; i++) {
-		for (int j = i + 1; j < len; j++) {
-			if (str[i] > str[j]) {
-				char temp = str[i];
-				str[i] = str[j];
-				str[j] = temp;
-			}
-		}
-	}
-	cout << str;
-}
+
 
 void imprimeProdutos() {
 	string* impressao = new string();
@@ -125,7 +114,7 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 			removeProd(produt, ap);
 			break;
 		case '2':
-			atualizaPreco(sectores, Nsector, produt, ap);
+			atualizaPreco(ap, Nsector);
 			break;
 		case '3':
 			//iniciaCamp();
