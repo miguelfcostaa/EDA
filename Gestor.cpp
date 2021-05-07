@@ -16,7 +16,7 @@ using namespace std;
 
 void removeProd(armazem* ap, int Nsector, sector* sectores) {
 	string nomeaux;
-	cout << "Introduza o produto que deseja eleminar: " << endl;
+	cout << "Introduza o produto que deseja eliminar: (em vez do espaço utilize '_') " << endl;
 	cin >> nomeaux;
 	for (int i = 0; i < Nsector; i++) {
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
@@ -24,6 +24,7 @@ void removeProd(armazem* ap, int Nsector, sector* sectores) {
 				sectores[i].prods[j].produto = sectores[i].prods[j + 1].produto;
 				sectores[i].prods[j].preco = sectores[i].prods[j + 1].preco;
 				sectores[i].Nproduto--;
+				cout << "Produto vendido." << endl;
 			}
 
 		}
@@ -33,7 +34,7 @@ void removeProd(armazem* ap, int Nsector, sector* sectores) {
 armazem* atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	string nomeaux;
 	int novopreco;
-	cout << "Introduza o nome do produto: ";
+	cout << "Introduza o nome do produto: (em vez do espaço utilize '_')";
 	cin >> nomeaux;
 	cout << "Introduza um novo valor para o produto: ";
 	cin >> novopreco;
@@ -115,19 +116,59 @@ void ordemAlfabetica(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	mostraSector(sectores, produt, Nsector);
 }
 
-/*
-void gravarsuper(string lista, sector* sectores, int Nsector, prod* produt) {
-	fstream lista;
+
+void gravarsuper(string gravacoes, sector* sectores, int Nsector, prod* produt) {
+	fstream ficheiro;
 	string res = to_string(Nsector) + "\n";
-	for (int i = 0; i < Nsector; i++) {
-		res = res + sectores[i].letra + "|" + produt[i].produto + " " + to_string(produt[i].preco) + "|" + to_string(sectores[i].capacidade) + "|" + to_string(sectores[i].Nproduto) + "\n";
+	for (int i = 0; i < sectores->Nproduto; i++) {
+		res = res + sectores[i].letra + "|" + sectores[i].prods[i].produto + " " + to_string(sectores[i].prods[i].preco) + "|" + to_string(sectores[i].Nproduto) + "|" + to_string(sectores[i].capacidade) + "\n";
 	}
-	lista.open(lista, ifstream::out);
+	ficheiro.open(gravacoes, ifstream::out);
 	ficheiro << res;
 	ficheiro.close();
 }
-*/
 
+
+void alteraArea(armazem* ap, sector* sectores, int Nsector) {
+	string area = "";
+	int c;
+	cout << "Qual o sector que deseja alterar?(letra maiuscula):";
+	cin >> c;
+	cin.ignore();
+	cout << endl << "Escolha uma das areas abaixo:" << endl;
+	areas();
+	getline(cin, area);
+	for (int i = 0; i < Nsector; i++) {
+		if (sectores[i].letra == c) {
+			sectores[i].areas = area;
+			for (int j = 0; j < sectores[i].Nproduto; j++) {
+				for (int k = 0; k < ap->n_produtos; k++) {
+					sectores[i].prods[j].produto = ap->prodarm[k].produto;
+					sectores[i].prods[j].preco = ap->prodarm[k].preco;
+					ap->n_produtos--;
+					removeProdutos(ap);
+				}
+			}
+		}
+	}
+}
+
+void mostraregisto(sector* sectores, int Nsector) {
+	string nomeaux;
+	cout << "Qual o responsavel de sector do qual deseja ver o registo de vendas? ";
+	cin >> nomeaux;
+	for (int i = 0; i < Nsector; i++) {
+		if (nomeaux == sectores[i].nome) {
+			cout << "Foram vendidos os seguintes produtos: " << endl;
+			for (int j = 0; j < sectores[i].Nproduto; j++) {
+				if (sectores[i].prods[j].vendido == true) {
+					cout << sectores[i].prods[j].produto << endl;
+				}
+			}
+		}
+	}
+	cout << endl;
+}
 
 void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	bool sair = false;
@@ -151,17 +192,17 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 		switch (opcao) {
 		case '1':
 			removeProd(ap,Nsector,sectores);
-			
+			mostraSector(sectores, produt, Nsector);
 			break;
 		case '2':
 			atualizaPreco(sectores, Nsector,produt, ap);
 			cout << endl;
 			break;
 		case '3':
-			//iniciaCamp();
+			iniciaCampanha(Nsector, sectores, produt);
 			break;
 		case '4':
-			//gravarSuper();
+			gravarsuper("nomes.txt", sectores, Nsector, produt);
 			break;
 		case '5':
 			//carregaSuper();
@@ -173,10 +214,10 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 			//novaArea();
 			break;
 		case '8':
-			//MostraReg();
+			mostraregisto(sectores, Nsector);
 			break;
 		case '9':
-			//alteraArea();
+			alteraArea(ap, sectores, Nsector);
 			break;
 		case '0':
 			cout << "Escolheu a opção Voltar." << endl;
