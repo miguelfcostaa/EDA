@@ -31,22 +31,23 @@ void removeProd(armazem* ap, int Nsector, sector* sectores) {
 	}
 }
 
-armazem* atualizaPreco(sector* sectores, int Nsector, prod* produt, armazem* ap) {
+armazem* atualizaPreco(sector* sectores, prod* produt, armazem* ap) {
 	string nomeaux;
 	int novopreco;
-	cout << "Introduza o nome do produto: (em vez do espaço utilize '_')";
+	cout << "Introduza o nome do produto (em vez do espaço utilize '_') : ";
 	cin >> nomeaux;
 	cout << "Introduza um novo valor para o produto: ";
 	cin >> novopreco;
 	for (int i = 0; i < ap->n_produtos; i++) {
 		if (ap->prodarm[i].produto == nomeaux) {
 			ap->prodarm[i].preco = novopreco;
+			cout << "O preco foi alterado com sucesso!" << endl;
 		}
 	}
 	return ap;
 }
 
-void iniciaCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A duraçao 
+void iniciaCampanha(int Nsector, sector* sectores, prod* produt) {
 	int desconto;
 	string nomeaux;
 	int duracao;
@@ -63,7 +64,9 @@ void iniciaCampanha(int Nsector, sector* sectores, prod* produt) {//FALTA A dura
 	}
 }
 
+void novaArea(armazem* ap) {
 
+}
 
 void imprimeProdutos(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	string* impressao = new string();
@@ -117,13 +120,13 @@ void ordemAlfabetica(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 }
 
 
-void gravarsuper(string gravacoes, sector* sectores, int Nsector, prod* produt) {
+void gravarsuper(string gravac, sector* sectores, int Nsector, prod* produt) {
 	fstream ficheiro;
 	string res = to_string(Nsector) + "\n";
 	for (int i = 0; i < sectores->Nproduto; i++) {
 		res = res + sectores[i].letra + "|" + sectores[i].prods[i].produto + " " + to_string(sectores[i].prods[i].preco) + "|" + to_string(sectores[i].Nproduto) + "|" + to_string(sectores[i].capacidade) + "\n";
 	}
-	ficheiro.open(gravacoes, ifstream::out);
+	ficheiro.open(gravac, ifstream::out);
 	ficheiro << res;
 	ficheiro.close();
 }
@@ -132,7 +135,7 @@ void gravarsuper(string gravacoes, sector* sectores, int Nsector, prod* produt) 
 void alteraArea(armazem* ap, sector* sectores, int Nsector) {
 	string area = "";
 	int c;
-	cout << "Qual o sector que deseja alterar?(letra maiuscula):";
+	cout << "Qual o sector que deseja alterar?(letra maiuscula): ";
 	cin >> c;
 	cin.ignore();
 	cout << endl << "Escolha uma das areas abaixo:" << endl;
@@ -152,6 +155,7 @@ void alteraArea(armazem* ap, sector* sectores, int Nsector) {
 		}
 	}
 }
+
 
 void mostraregisto(sector* sectores, int Nsector) {
 	string nomeaux;
@@ -195,14 +199,15 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 			mostraSector(sectores, produt, Nsector);
 			break;
 		case '2':
-			atualizaPreco(sectores, Nsector,produt, ap);
+			atualizaPreco(sectores, produt, ap);
+			mostraArmazem(ap, sectores);
 			cout << endl;
 			break;
 		case '3':
 			iniciaCampanha(Nsector, sectores, produt);
 			break;
 		case '4':
-			gravarsuper("nomes.txt", sectores, Nsector, produt);
+			gravarsuper("gravacao.txt", sectores, Nsector, produt);
 			break;
 		case '5':
 			//carregaSuper();
