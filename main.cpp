@@ -6,6 +6,7 @@
 #include <time.h>
 #include <locale>
 #include <string>
+#include <fstream>
 #include "armazem.h"
 #include "sector.h"
 #include "gestor.h"
@@ -23,11 +24,14 @@ int main() {
     prod* produt = new prod;                     //criar object para a struct produtos
     armazem* ap = criaArmazem();             //criar object para a struct armazem
 
+    cout << "Existem " << Nsector << " sectores." << endl;
     criasector(sectores, Nsector, produt, ap);        //criar os sectores antes de                              
 
-    mostraArmazem(ap);
+    mostraArmazem(ap,sectores);
     cout << endl;
     mostraSector(sectores, produt, Nsector);
+
+    ifstream ficheiro("gravacao.txt");
 
     char escolha;
     bool sair = false;
@@ -36,11 +40,12 @@ int main() {
         cin >> escolha;
         switch (escolha) {
         case 's':
+            addProdutos(ap);
             mostraSector(sectores, produt, Nsector);
-            mostraArmazem(ap);
-            addProdutos(ap);
             prodVend(sectores, Nsector);
-            addProdutos(ap);
+            cout << endl << "------------------------- VERIFICACAO DA VENDA ----------------------------------------" << endl;
+            prodVend(sectores, Nsector);
+            mostraSector(sectores, produt, Nsector);
             break;
         case 'g':
             gestor(sectores, Nsector, produt, ap);
