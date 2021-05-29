@@ -4,6 +4,7 @@
 using namespace std;
 
 struct prod {
+    bool vendido;
     string produto;
     string fornecedores;
     int preco;
@@ -21,6 +22,7 @@ struct sector {
 struct armazem {
     prod* prodarm;
     int n_produtos = 0;
+    string area;
 };
 
 
@@ -30,5 +32,6 @@ string* fornecedores();
 int preco();
 string* areas();
 sector* criasector(sector* sectores, int Nsector, prod* produt, armazem* ap);
+void prodVend(sector* sectores, int Nsector);
 void mostraSector(sector* sectores, prod* produt, int Nsector);
 prod* criaProdutos(armazem* ap, int Nprodutos);
