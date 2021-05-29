@@ -11,7 +11,7 @@ using namespace std;
 
 
 string* stock() {
-	ifstream produto("nomes.txt");
+	ifstream produto("nomes_.txt");
 	string l;
 	string* lines = new string[100];
 	int i = 0;
@@ -44,7 +44,7 @@ prod* criaProdutos(armazem* ap, int Nproduts) {
 		produts[i].produto = nomep[n];
 		produts[i].fornecedores = fornecedor[f];
 		produts[i].preco = preco();
-		//produts[i].vendido = false;
+		produts[i].vendido = false;
 		ap->n_produtos++;
 	}
 	return produts;
@@ -57,10 +57,12 @@ void addProdutos(armazem* ap) {
 }
 
 
-void mostraArmazem(armazem* ap) {
+void mostraArmazem(armazem* ap, sector* sectores) {
+	cout << endl << "Armazem:" << endl;
 	for (int i = 0; i < ap->n_produtos; i++) {
 		cout << "Produto: " << ap->prodarm[i].produto;
-		cout << " | Preço: " << ap->prodarm[i].preco << endl;
+		cout << " | Preço: " << ap->prodarm[i].preco << " Euros " << " | ";
+		cout << "Area: " << sectores[i].areas << endl; 
 	}
 }
 
@@ -72,6 +74,7 @@ void removeProdutos(armazem* ap) {
 	}
 	ap->n_produtos--;
 }
+
 
 
 prod* removeProdArm(armazem* ap, int Nproduto, prod* produt, sector* sectores) {
