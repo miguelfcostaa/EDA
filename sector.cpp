@@ -12,7 +12,7 @@ using namespace std;
 
 //Ler o file dos produtos linha a linha
 string* produtos() {
-	ifstream produto("nomes_.txt");
+	ifstream produto("nomes.txt");
 	string l;
 	string* lines = new string[100];
 	int i = 0;
