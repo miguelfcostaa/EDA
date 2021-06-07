@@ -11,7 +11,7 @@ using namespace std;
 
 
 string* stock() {
-	ifstream produto("nomes_.txt");
+	ifstream produto("nomes.txt");
 	string l;
 	string* lines = new string[100];
 	int i = 0;
