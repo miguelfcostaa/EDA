@@ -16,8 +16,8 @@ using namespace std;
 
 void removeProd(armazem* ap, int Nsector, sector* sectores) {
 	string nomeaux;
-	cout << "Introduza o produto que deseja eliminar: (em vez do espaço utilize '_') " << endl;
-	cin >> nomeaux;
+	cout << "Introduza o produto que deseja eliminar: " << endl;
+	getline(cin,nomeaux);
 	for (int i = 0; i < Nsector; i++) {
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
 			if (sectores[i].prods[j].produto == nomeaux) {
@@ -124,11 +124,14 @@ void gravarsuper(string gravac, sector* sectores, int Nsector, prod* produt) {
 	fstream ficheiro;
 	string res = to_string(Nsector) + "\n";
 	for (int i = 0; i < sectores->Nproduto; i++) {
-		res = res + sectores[i].letra + "|" + sectores[i].prods[i].produto + " " + to_string(sectores[i].prods[i].preco) + "|" + to_string(sectores[i].Nproduto) + "|" + to_string(sectores[i].capacidade) + "\n";
+		res = res + "Sector: " + sectores[i].letra + " | Responsavel: " + sectores[i].nome + " | Capacidade: " + to_string(sectores[i].capacidade) + " | Produtos: " + to_string(sectores[i].Nproduto) + " | Area: " + sectores[i].areas + "\n" + "Produto : " + sectores[i].prods[i].produto + " | Preco : " + to_string(sectores[i].prods->preco) + " Euros" + "\n" + "-----------------------------------------------------";
+		
 	}
 	ficheiro.open(gravac, ifstream::out);
 	ficheiro << res;
 	ficheiro.close();
+	cout << "O supermercado foi guardado com sucesso." << endl;
+	cout << endl;
 }
 
 
