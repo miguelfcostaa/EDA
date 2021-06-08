@@ -16,8 +16,12 @@ using namespace std;
 
 void removeProd(armazem* ap, int Nsector, sector* sectores) {
 	string nomeaux;
-	cout << "Introduza o produto que deseja eliminar: " << endl;
-	getline(cin,nomeaux);
+	cout << "Introduza o produto que deseja eliminar: ";
+	while (getline(cin, nomeaux)) {
+		if (nomeaux != "") {
+			break;
+		}
+	}
 	for (int i = 0; i < Nsector; i++) {
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
 			if (sectores[i].prods[j].produto == nomeaux) {
@@ -34,8 +38,13 @@ void removeProd(armazem* ap, int Nsector, sector* sectores) {
 armazem* atualizaPreco(sector* sectores, prod* produt, armazem* ap) {
 	string nomeaux;
 	int novopreco;
-	cout << "Introduza o nome do produto (em vez do espaço utilize '_') : ";
-	cin >> nomeaux;
+	cout << "Introduza o nome do produto: ";
+	while (getline(cin, nomeaux)) {
+		if (nomeaux != "") {
+			break;
+		}
+	}
+	//cin >> nomeaux;
 	cout << "Introduza um novo valor para o produto: ";
 	cin >> novopreco;
 	for (int i = 0; i < ap->n_produtos; i++) {
@@ -81,7 +90,7 @@ void imprimeProdutos(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 		cout << endl;
 		switch (opcao) {
 		case '1':
-			ordemAlfabetica(sectores,Nsector,produt,ap);
+			ordemAlfabetica(sectores, Nsector, produt, ap);
 			break;
 		case '2':
 			//ordemPreco();
@@ -124,8 +133,8 @@ void gravarsuper(string gravac, sector* sectores, int Nsector, prod* produt) {
 	fstream ficheiro;
 	string res = to_string(Nsector) + "\n";
 	for (int i = 0; i < sectores->Nproduto; i++) {
-		res = res + "Sector: " + sectores[i].letra + " | Responsavel: " + sectores[i].nome + " | Capacidade: " + to_string(sectores[i].capacidade) + " | Produtos: " + to_string(sectores[i].Nproduto) + " | Area: " + sectores[i].areas + "\n" + "Produto : " + sectores[i].prods[i].produto + " | Preco : " + to_string(sectores[i].prods->preco) + " Euros" + "\n" + "-----------------------------------------------------";
-		
+		res = res + "Sector: " + sectores[i].letra + " | Responsavel: " + sectores[i].nome + " | Capacidade: " + to_string(sectores[i].capacidade) + " | Produtos: " + to_string(sectores[i].Nproduto) + " | Area: " + sectores[i].areas + "\n" + "Produto : " + sectores[i].prods[i].produto + " | Preco : " + to_string(sectores[i].prods->preco) + " Euros" + "\n" + "-----------------------------------------------------" + "\n";
+
 	}
 	ficheiro.open(gravac, ifstream::out);
 	ficheiro << res;
@@ -198,7 +207,7 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 		cout << endl;
 		switch (opcao) {
 		case '1':
-			removeProd(ap,Nsector,sectores);
+			removeProd(ap, Nsector, sectores);
 			mostraSector(sectores, produt, Nsector);
 			break;
 		case '2':
