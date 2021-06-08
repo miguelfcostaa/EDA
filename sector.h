@@ -8,6 +8,7 @@ struct prod {
     string produto;
     string fornecedores;
     int preco;
+    string area;
 };
 
 struct sector {
@@ -22,7 +23,6 @@ struct sector {
 struct armazem {
     prod* prodarm;
     int n_produtos = 0;
-    string area;
 };
 
 
