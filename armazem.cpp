@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 string* stock() {
 	ifstream produto("nomes.txt");
 	string l;
@@ -38,12 +37,13 @@ prod* criaProdutos(armazem* ap, int Nproduts) {
 	prod* produts = new prod[Nproduts];
 	string* nomep = produtos();
 	string* fornecedor = fornecedores();
-	string* area = areas();
+	string* Area = areas();
 	for (int i = 0; i < Nproduts; i++) {
-		int n = rand() % 100; int f = rand() % 15;
+		int n = rand() % 100; int f = rand() % 15; int z = rand() % 16;
 		produts[i].produto = nomep[n];
 		produts[i].fornecedores = fornecedor[f];
 		produts[i].preco = preco();
+		produts[i].area = Area[z];
 		produts[i].vendido = false;
 		ap->n_produtos++;
 	}
@@ -62,7 +62,7 @@ void mostraArmazem(armazem* ap, sector* sectores) {
 	for (int i = 0; i < ap->n_produtos; i++) {
 		cout << "Produto: " << ap->prodarm[i].produto;
 		cout << " | Preço: " << ap->prodarm[i].preco << " Euros " << " | ";
-		cout << "Area: " << sectores[i].areas << endl; 
+		cout << "Area: " << ap->prodarm[i].area << endl;
 	}
 }
 
