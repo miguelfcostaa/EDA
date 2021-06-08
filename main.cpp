@@ -27,7 +27,7 @@ int main() {
     cout << "Existem " << Nsector << " sectores." << endl;
     criasector(sectores, Nsector, produt, ap);        //criar os sectores antes de                              
 
-    mostraArmazem(ap,sectores);
+    mostraArmazem(ap, sectores);
     cout << endl;
     mostraSector(sectores, produt, Nsector);
 
@@ -36,7 +36,7 @@ int main() {
     char escolha;
     bool sair = false;
     do {
-        cout << "(s) Seguinte   |   (g)Gestão   |   (n)Sair" << endl;
+        cout << "(s)eguinte ************* (g)estão" << endl;
         cin >> escolha;
         switch (escolha) {
         case 's':
