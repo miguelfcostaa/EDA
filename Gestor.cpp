@@ -1,4 +1,3 @@
-#include <iostream>
 #include < stdlib.h >
 #include <time.h>
 #include <fstream>
@@ -9,9 +8,10 @@
 #include "armazem.h"
 #include <algorithm>
 #include <iomanip>
+#include <iostream>
+
 
 using namespace std;
-
 
 
 void removeProd(armazem* ap, int Nsector, sector* sectores) {
@@ -30,7 +30,6 @@ void removeProd(armazem* ap, int Nsector, sector* sectores) {
 				sectores[i].Nproduto--;
 				cout << "Produto vendido." << endl;
 			}
-
 		}
 	}
 }
@@ -44,7 +43,6 @@ armazem* atualizaPreco(sector* sectores, prod* produt, armazem* ap) {
 			break;
 		}
 	}
-	//cin >> nomeaux;
 	cout << "Introduza um novo valor para o produto: ";
 	cin >> novopreco;
 	for (int i = 0; i < ap->n_produtos; i++) {
@@ -61,11 +59,15 @@ void iniciaCampanha(int Nsector, sector* sectores, prod* produt) {
 	string nomeaux;
 	int duracao;
 	cout << "Selecione a area para a campanha: ";
-	cin >> nomeaux;
+	while (getline(cin, nomeaux)) {
+		if (nomeaux != "") {
+			break;
+		}
+	}
 	cout << endl << "Introduza o valor do desconto (valores entre 0 e 100): ";
 	cin >> desconto;
-	cout << endl << "Selecione a duraçao da campanha: ";
-	cin >> duracao;
+	//cout << endl << "Selecione a duraçao da campanha: ";
+	//cin >> duracao;
 	for (int i = 0; i < Nsector; i++) {
 		if (sectores[i].areas == nomeaux) {
 			produt[i].preco = produt[i].preco * ((100 - desconto) / 100);
@@ -73,8 +75,17 @@ void iniciaCampanha(int Nsector, sector* sectores, prod* produt) {
 	}
 }
 
-void novaArea(armazem* ap) {
-
+void novaArea(armazem* ap, sector* sectores) {
+	string nomeaux;
+	for (int i = 0; i < ap->n_produtos; i++) {
+		cout << "Como deseja que se chame a nova area?\n";
+		while (getline(cin, nomeaux)) {
+			if (nomeaux != "") {
+				break;
+			}
+		}
+		sectores[i].areas = sectores[i].areas + nomeaux;
+	}
 }
 
 void imprimeProdutos(sector* sectores, int Nsector, prod* produt, armazem* ap) {
@@ -105,6 +116,7 @@ void imprimeProdutos(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	} while (!sair);
 }
 
+
 void ordemAlfabetica(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	int j = 0;
 	bool swap = true;
@@ -129,12 +141,32 @@ void ordemAlfabetica(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 }
 
 
+void gravarsuper2(string gravac, sector* sectores, int Nsector, prod* produt) {
+	fstream ficheiro;
+	string res;
+	for (int i = 0; i < Nsector; i++) {
+		res = res + "Sector: " + sectores[i].letra + " | Responsavel: " + sectores[i].nome + " | Capacidade: " + to_string(sectores[i].capacidade) + " | Produtos: " + to_string(sectores[i].Nproduto) + " | Area: " + sectores[i].areas;
+		for (int j = 0; j < sectores[i].Nproduto; j++) {
+			res = res + "\n" + "Produto : " + sectores[i].prods[j].produto + " | Preco : " + to_string(sectores[i].prods[j].preco) + " Euros";
+		}
+		res = res + "\n" +"---------------------------------------------------------------------------------------------------------------" + "\n";
+	}
+	ficheiro.open(gravac, ifstream::out);
+	ficheiro << res;
+	ficheiro.close();
+	cout << "O supermercado foi guardado com sucesso." << endl;
+	cout << endl;
+}
+
 void gravarsuper(string gravac, sector* sectores, int Nsector, prod* produt) {
 	fstream ficheiro;
-	string res = to_string(Nsector) + "\n";
-	for (int i = 0; i < sectores->Nproduto; i++) {
-		res = res + "Sector: " + sectores[i].letra + " | Responsavel: " + sectores[i].nome + " | Capacidade: " + to_string(sectores[i].capacidade) + " | Produtos: " + to_string(sectores[i].Nproduto) + " | Area: " + sectores[i].areas + "\n" + "Produto : " + sectores[i].prods[i].produto + " | Preco : " + to_string(sectores[i].prods->preco) + " Euros" + "\n" + "-----------------------------------------------------" + "\n";
-
+	string res;
+	for (int i = 0; i < Nsector; i++) {
+		res = res + " " + sectores[i].letra + "  " + sectores[i].nome + "  " + to_string(sectores[i].capacidade) + "  " + to_string(sectores[i].Nproduto) + "  " + sectores[i].areas;
+		for (int j = 0; j < sectores[i].Nproduto; j++) {
+			res = res + "\n" + "  " + sectores[i].prods[j].produto + "  " + to_string(sectores[i].prods[j].preco) /*+ " Euros"*/;
+		}
+		res = res + "\n" +"---------------------------------------------------------------------------------------------------------------" + "\n";
 	}
 	ficheiro.open(gravac, ifstream::out);
 	ficheiro << res;
@@ -144,6 +176,35 @@ void gravarsuper(string gravac, sector* sectores, int Nsector, prod* produt) {
 }
 
 
+void carregaSuper(string estadoGravado, int Nsector) {
+		sector* estado = new sector[Nsector];
+		fstream ficheiro(estadoGravado, ios::in);
+		string line;
+		getline(ficheiro, line);
+		char letra;
+		string produto;
+		string responsavel;
+		string area;
+		int produtos;
+		int preco{};
+		int capacidade;
+		int i = 0;
+		int j = 0;
+		char c;
+		while ((ficheiro >> letra >> c >> c >> responsavel >> c  >> c >> capacidade >> c >> c >> produtos >> c >> c >> area )) {
+			estado[i].letra = letra;
+			estado[i].areas = area;
+			estado[i].capacidade = capacidade;
+			estado[i].prods[j].produto = produto;
+			estado[i].prods[j].preco = preco;
+			i++;
+			j++;
+		}
+		ficheiro.close();
+}
+
+
+/*
 void alteraArea(armazem* ap, sector* sectores, int Nsector) {
 	string area = "";
 	int c;
@@ -167,12 +228,16 @@ void alteraArea(armazem* ap, sector* sectores, int Nsector) {
 		}
 	}
 }
-
+*/
 
 void mostraregisto(sector* sectores, int Nsector) {
 	string nomeaux;
 	cout << "Qual o responsavel de sector do qual deseja ver o registo de vendas? ";
-	cin >> nomeaux;
+	while (getline(cin, nomeaux)) {
+		if (nomeaux != "") {
+			break;
+		}
+	}
 	for (int i = 0; i < Nsector; i++) {
 		if (nomeaux == sectores[i].nome) {
 			cout << "Foram vendidos os seguintes produtos: " << endl;
@@ -185,6 +250,7 @@ void mostraregisto(sector* sectores, int Nsector) {
 	}
 	cout << endl;
 }
+
 
 void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	bool sair = false;
@@ -200,7 +266,6 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 		cout << "(6) - Imprimir Produtos" << endl;
 		cout << "(7) - Criar nova área" << endl;
 		cout << "(8) - Mostrar registo de vendas" << endl;
-		cout << "(9) - Alterar área" << endl;
 		cout << "(0) - Voltar" << endl;
 		cout << "Selecione a sua opção:" << endl;
 		cin >> opcao;
@@ -222,19 +287,17 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 			gravarsuper("gravacao.txt", sectores, Nsector, produt);
 			break;
 		case '5':
-			//carregaSuper();
+			carregaSuper("gravacao.txt", Nsector);
+			mostraSector(sectores, produt, Nsector);
 			break;
 		case '6':
 			imprimeProdutos(sectores, Nsector, produt, ap);
 			break;
 		case '7':
-			//novaArea();
+			novaArea(ap, sectores);
 			break;
 		case '8':
 			mostraregisto(sectores, Nsector);
-			break;
-		case '9':
-			alteraArea(ap, sectores, Nsector);
 			break;
 		case '0':
 			cout << "Escolheu a opção Voltar." << endl;
