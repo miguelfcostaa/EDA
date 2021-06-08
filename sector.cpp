@@ -46,7 +46,7 @@ string* fornecedores() { // retorna uma lista com os fornecedores
 string* nomes(sector* sectores, int i) {
 	string* nome = new string[30];
 	cout << "Insira o nome do responsavel do sector " << sectores[i].letra << " : ";
-	cin >> sectores[i].nome;
+	getline(cin, sectores[i].nome);
 	return nome;
 }
 
@@ -104,7 +104,7 @@ sector* criasector(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 		sectores[i].capacidade = capacidade;
 		sectores[i].Nproduto = Nproduto;
 		sectores[i].areas = lines[a];
-		sectores[i].prods = removeProdArm(ap,Nproduto,produt,sectores);
+		sectores[i].prods = removeProdArm(ap, Nproduto, produt, sectores);
 		produt[i].preco = preco();
 	}
 	return sectores;
