@@ -66,8 +66,8 @@ void iniciaCampanha(int Nsector, sector* sectores, prod* produt) {
 	}
 	cout << endl << "Introduza o valor do desconto (valores entre 0 e 100): ";
 	cin >> desconto;
-	//cout << endl << "Selecione a duraçao da campanha: ";
-	//cin >> duracao;
+	cout << endl << "Selecione a duraçao da campanha: ";
+	cin >> duracao;
 	for (int i = 0; i < Nsector; i++) {
 		if (sectores[i].areas == nomeaux) {
 			produt[i].preco = produt[i].preco * ((100 - desconto) / 100);
@@ -75,18 +75,6 @@ void iniciaCampanha(int Nsector, sector* sectores, prod* produt) {
 	}
 }
 
-void novaArea(armazem* ap, sector* sectores) {
-	string nomeaux;
-	for (int i = 0; i < ap->n_produtos; i++) {
-		cout << "Como deseja que se chame a nova area?\n";
-		while (getline(cin, nomeaux)) {
-			if (nomeaux != "") {
-				break;
-			}
-		}
-		sectores[i].areas = sectores[i].areas + nomeaux;
-	}
-}
 
 void imprimeProdutos(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 	string* impressao = new string();
@@ -141,6 +129,28 @@ void ordemAlfabetica(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 }
 
 
+void novaArea(string area,int Nsector, armazem* ap, sector* sectores) {
+	fstream ficheiro;
+	string nomeaux;
+	string res;
+	string* lines = areas();
+	cout << "Como deseja que se chame a nova area?\n";
+	while (getline(cin, nomeaux)) {
+		if (nomeaux != "") {
+			break;
+		}
+	}
+	for (int i = 0; i < Nsector; i++) {
+		res = res + sectores[i].areas + "\n";
+	}
+	res = res + nomeaux;
+	ficheiro.open(area, ifstream::out);
+	ficheiro << res;
+	ficheiro.close();
+	cout << "A nova area foi criada com sucesso." << endl;
+}
+
+
 void gravarsuper2(string gravac, sector* sectores, int Nsector, prod* produt) {
 	fstream ficheiro;
 	string res;
@@ -149,7 +159,7 @@ void gravarsuper2(string gravac, sector* sectores, int Nsector, prod* produt) {
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
 			res = res + "\n" + "Produto : " + sectores[i].prods[j].produto + " | Preco : " + to_string(sectores[i].prods[j].preco) + " Euros";
 		}
-		res = res + "\n" +"---------------------------------------------------------------------------------------------------------------" + "\n";
+		res = res + "\n" + "---------------------------------------------------------------------------------------------------------------" + "\n";
 	}
 	ficheiro.open(gravac, ifstream::out);
 	ficheiro << res;
@@ -166,7 +176,7 @@ void gravarsuper(string gravac, sector* sectores, int Nsector, prod* produt) {
 		for (int j = 0; j < sectores[i].Nproduto; j++) {
 			res = res + "\n" + "  " + sectores[i].prods[j].produto + "  " + to_string(sectores[i].prods[j].preco) /*+ " Euros"*/;
 		}
-		res = res + "\n" +"---------------------------------------------------------------------------------------------------------------" + "\n";
+		res = res + "\n" + "---------------------------------------------------------------------------------------------------------------" + "\n";
 	}
 	ficheiro.open(gravac, ifstream::out);
 	ficheiro << res;
@@ -177,30 +187,30 @@ void gravarsuper(string gravac, sector* sectores, int Nsector, prod* produt) {
 
 
 void carregaSuper(string estadoGravado, int Nsector) {
-		sector* estado = new sector[Nsector];
-		fstream ficheiro(estadoGravado, ios::in);
-		string line;
-		getline(ficheiro, line);
-		char letra;
-		string produto;
-		string responsavel;
-		string area;
-		int produtos;
-		int preco{};
-		int capacidade;
-		int i = 0;
-		int j = 0;
-		char c;
-		while ((ficheiro >> letra >> c >> c >> responsavel >> c  >> c >> capacidade >> c >> c >> produtos >> c >> c >> area )) {
-			estado[i].letra = letra;
-			estado[i].areas = area;
-			estado[i].capacidade = capacidade;
-			estado[i].prods[j].produto = produto;
-			estado[i].prods[j].preco = preco;
-			i++;
-			j++;
-		}
-		ficheiro.close();
+	sector* estado = new sector[Nsector];
+	fstream ficheiro(estadoGravado, ios::in);
+	string line;
+	getline(ficheiro, line);
+	char letra;
+	string produto;
+	string responsavel;
+	string area;
+	int produtos;
+	int preco{};
+	int capacidade;
+	int i = 0;
+	int j = 0;
+	char c;
+	while ((ficheiro >> letra >> c >> c >> responsavel >> c >> c >> capacidade >> c >> c >> produtos >> c >> c >> area)) {
+		estado[i].letra = letra;
+		estado[i].areas = area;
+		estado[i].capacidade = capacidade;
+		estado[i].prods[j].produto = produto;
+		estado[i].prods[j].preco = preco;
+		i++;
+		j++;
+	}
+	ficheiro.close();
 }
 
 
@@ -294,7 +304,7 @@ void gestor(sector* sectores, int Nsector, prod* produt, armazem* ap) {
 			imprimeProdutos(sectores, Nsector, produt, ap);
 			break;
 		case '7':
-			novaArea(ap, sectores);
+			novaArea("novaarea.txt",Nsector, ap, sectores);
 			break;
 		case '8':
 			mostraregisto(sectores, Nsector);
